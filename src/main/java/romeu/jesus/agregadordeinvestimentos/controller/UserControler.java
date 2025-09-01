@@ -2,12 +2,14 @@ package romeu.jesus.agregadordeinvestimentos.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import romeu.jesus.agregadordeinvestimentos.controller.dto.AccountDto;
+import romeu.jesus.agregadordeinvestimentos.controller.dto.UpdateDto;
+import romeu.jesus.agregadordeinvestimentos.controller.dto.UserDto;
 import romeu.jesus.agregadordeinvestimentos.entity.User;
 import romeu.jesus.agregadordeinvestimentos.service.UserService;
 
 import java.net.URI;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -56,4 +58,13 @@ public class UserControler {
         userService.updateUserById(userId, updateDto);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{userId}/accounts")
+    public ResponseEntity<Void> updateUser( @PathVariable("userId") String userId,
+                                            @RequestBody AccountDto accountDto){
+        userService.createAccount(userId, accountDto);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

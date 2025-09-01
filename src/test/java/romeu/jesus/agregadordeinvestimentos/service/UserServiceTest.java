@@ -9,8 +9,8 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import romeu.jesus.agregadordeinvestimentos.controller.UpdateDto;
-import romeu.jesus.agregadordeinvestimentos.controller.UserDto;
+import romeu.jesus.agregadordeinvestimentos.controller.dto.UpdateDto;
+import romeu.jesus.agregadordeinvestimentos.controller.dto.UserDto;
 import romeu.jesus.agregadordeinvestimentos.entity.User;
 import romeu.jesus.agregadordeinvestimentos.repository.UserRepository;
 
@@ -50,6 +50,7 @@ class UserServiceTest {
                                     "email@email.com",
                                     "password",
                                     Instant.now(),
+                                    null,
                                     null
                                 );
             doReturn(user).when(userRepository).saveAndFlush(userArgumentCaptor.capture());
@@ -94,6 +95,7 @@ class UserServiceTest {
                     "email@email.com",
                     "password",
                     Instant.now(),
+                    null,
                     null
             );
             doReturn(Optional.of(user))
@@ -135,6 +137,7 @@ class UserServiceTest {
                     "email@email.com",
                     "password",
                     Instant.now(),
+                    null,
                     null
             );
             var userList = List.of(user);
@@ -212,6 +215,7 @@ class UserServiceTest {
                     "email@email.com",
                     "password",
                     Instant.now(),
+                    null,
                     null
                     );
 

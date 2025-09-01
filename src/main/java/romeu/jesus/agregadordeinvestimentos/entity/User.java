@@ -1,11 +1,9 @@
 package romeu.jesus.agregadordeinvestimentos.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -30,16 +28,21 @@ public class User {
     @Column(name = "updatedtimestamp")
     private Instant createdTimeStamp;
 
+    @OneToMany(mappedBy = "user")
+    private List<Account> accounts;
+
     public User() {
     }
 
-    public User(UUID userId, String userName, String email, String password, Instant creationTimeStamp, Instant createdTimeStamp) {
+
+    public User(UUID userId, String userName, String email, String password, Instant creationTimeStamp, Instant createdTimeStamp, List<Account> accounts) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.creationTimeStamp = creationTimeStamp;
         this.createdTimeStamp = createdTimeStamp;
+        this.accounts = accounts;
     }
 
     public UUID getUserId() {
@@ -88,5 +91,13 @@ public class User {
 
     public void setCreatedTimeStamp(Instant createdTimeStamp) {
         this.createdTimeStamp = createdTimeStamp;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }
