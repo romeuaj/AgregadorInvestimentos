@@ -2,9 +2,7 @@ package romeu.jesus.agregadordeinvestimentos.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import romeu.jesus.agregadordeinvestimentos.controller.dto.AccountDto;
-import romeu.jesus.agregadordeinvestimentos.controller.dto.UpdateDto;
-import romeu.jesus.agregadordeinvestimentos.controller.dto.UserDto;
+import romeu.jesus.agregadordeinvestimentos.controller.dto.*;
 import romeu.jesus.agregadordeinvestimentos.entity.User;
 import romeu.jesus.agregadordeinvestimentos.service.UserService;
 
@@ -27,7 +25,7 @@ public class UserControler {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<User>> getAllUsers(){
+    public ResponseEntity<List<ListUserDto>> getAllUsers(){
         var users = userService.getAllUsers();
         if(users.isEmpty()){
             return ResponseEntity.notFound().build();
@@ -37,7 +35,7 @@ public class UserControler {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable("userId") String userId){
+    public ResponseEntity<User> getUserById(@PathVariable String userId){
         var user = userService.getUserById(userId);
         if (user.isPresent()){
             return ResponseEntity.ok(user.get());
@@ -47,24 +45,29 @@ public class UserControler {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> deleteById(@PathVariable("userId") String userId){
+    public ResponseEntity<Void> deleteById(@PathVariable String userId){
         userService.deleteById(userId);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<Void> updateUser( @PathVariable("userId") String userId,
+    public ResponseEntity<Void> updateUser( @PathVariable String userId,
                                             @RequestBody UpdateDto updateDto){
         userService.updateUserById(userId, updateDto);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{userId}/accounts")
-    public ResponseEntity<Void> updateUser( @PathVariable("userId") String userId,
+    @PostMapping("/accounts/{userId}")
+    public ResponseEntity<Void> updateUser( @PathVariable String userId,
                                             @RequestBody AccountDto accountDto){
         userService.createAccount(userId, accountDto);
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/accounts/{userId}")
+    public ResponseEntity<List<AccountResponseDto>>listAccounts(@PathVariable String userId){
+        var accounts = userService.listAccounts(userId);
+        return ResponseEntity.ok(accounts);
+    }
 
 }

@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tb_billingaddres")
-public class BillingAddres {
+@Table(name = "tb_billingaddress")
+public class BillingAddress {
 
     @Id
     @Column(name = "account_id")
@@ -23,10 +23,10 @@ public class BillingAddres {
     @Column(name = "number")
     private Integer number;
 
-    public BillingAddres() {
+    public BillingAddress() {
     }
 
-    public BillingAddres(UUID id, Account account, String street, Integer number) {
+    public BillingAddress(UUID id, Account account, String street, Integer number) {
         this.id = id;
         this.account = account;
         this.street = street;
@@ -39,6 +39,14 @@ public class BillingAddres {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public String getStreet() {

@@ -16,7 +16,7 @@ public class Account {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "account")
     @PrimaryKeyJoinColumn
-    private BillingAddres billingAddres;
+    private BillingAddress billingAddress;
 
     @Column(name = "description")
     private String description;
@@ -31,9 +31,9 @@ public class Account {
     public Account() {
     }
 
-    public Account(UUID accountId, User user, BillingAddres billingAddres, String description, List<AccountStock> accountStocks) {
+    public Account(UUID accountId, User user, String description, BillingAddress billingAddress, List<AccountStock> accountStocks) {
         this.accountId = accountId;
-        this.billingAddres = billingAddres;
+        this.billingAddress = billingAddress;
         this.description = description;
         this.user = user;
         this.accountStocks = accountStocks;
@@ -45,6 +45,14 @@ public class Account {
 
     public void setAccountId(UUID accountId) {
         this.accountId = accountId;
+    }
+
+    public BillingAddress getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(BillingAddress billingAddress) {
+        this.billingAddress = billingAddress;
     }
 
     public String getDescription() {
@@ -62,4 +70,14 @@ public class Account {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public List<AccountStock> getAccountStocks() {
+        return accountStocks;
+    }
+
+    public void setAccountStocks(List<AccountStock> accountStocks) {
+        this.accountStocks = accountStocks;
+    }
 }
+
+

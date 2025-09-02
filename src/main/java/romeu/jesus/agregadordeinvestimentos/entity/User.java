@@ -26,7 +26,7 @@ public class User {
     private Instant creationTimeStamp;
 
     @Column(name = "updatedtimestamp")
-    private Instant createdTimeStamp;
+    private Instant updatedTimeStamp;
 
     @OneToMany(mappedBy = "user")
     private List<Account> accounts;
@@ -41,7 +41,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.creationTimeStamp = creationTimeStamp;
-        this.createdTimeStamp = createdTimeStamp;
+        this.updatedTimeStamp = createdTimeStamp;
         this.accounts = accounts;
     }
 
@@ -86,11 +86,11 @@ public class User {
     }
 
     public Instant getCreatedTimeStamp() {
-        return createdTimeStamp;
+        return updatedTimeStamp;
     }
 
     public void setCreatedTimeStamp(Instant createdTimeStamp) {
-        this.createdTimeStamp = createdTimeStamp;
+        this.updatedTimeStamp = createdTimeStamp;
     }
 
     public List<Account> getAccounts() {
